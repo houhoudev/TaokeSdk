@@ -1,3 +1,4 @@
+@[TOC](淘宝客SDK，一键导入淘宝客商城，快速实现流量变现)
 # 一、Demo项目地址
 github地址：[https://github.com/houhoudev/TaokeSdk](https://github.com/houhoudev/TaokeSdk)
 demo下载：[立即下载](https://houhoudev.oss-cn-shenzhen.aliyuncs.com/downLoad/TaokeSdk.apk)
@@ -246,29 +247,29 @@ repositories {
 
 ```java
 	// 需要在接收事件的类中注册和取消注册事件
-
+	
 	// 注册事件
 	EventBusUtils.register(this);
-
+	
 	// 取消注册事件
 	EventBusUtils.unregister(this);
 ```
 
 ```java
- 	// 在类添加订阅事件
-
+ 	// 在类添加订阅事件 
+ 	
  	@Subscribe
     public void onReceiveMessage(EventMessage message) {
         if ("GET_COINS_SUCCESS".equals(message.type)) {
             // 签到、浏览商品、每日签到等获得金币通知 做刷新用户信息操作
             ToastUtils.show("签到成功");
         }
-
+        
         if ("LOGIN_SUCCESS".equals(message.type)) {
             // 登陆成功 做刷新用户信息操作
             ToastUtils.show("登录成功");
         }
-
+        
         if ("EXIT_LOGIN".equals(message.type)) {
             // 退出登录成功 做清除用户信息操作
             ToastUtils.show("退出成功");
