@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_gray"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="SDK"
+        android:textSize="18sp" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/frag_sdk_btn_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="跳转首页Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_classify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转分类Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转榜单Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_mine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转我的Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_glod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转金币Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="邀请好友Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_gooddetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="商品详情Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_collectiion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="我的收藏Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="历史记录Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="系统消息Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_ercode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="扫一扫Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="购物车Activity" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_sign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="每日签到接口" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_userinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="用户信息接口" />
+
+            <Button
+                android:id="@+id/frag_sdk_btn_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="退出登录" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
