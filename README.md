@@ -42,20 +42,20 @@ Module下build.gradle配置
 AndroidManifest.xml配置
 
 ```xml
-    <provider
-        android:name="android.support.v4.content.FileProvider"
-        android:authorities="com.houhoudev.red.fileprovider"
-        android:exported="false"
-        android:grantUriPermissions="true">
-        <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/file_paths" />
-    </provider>
+    	<provider
+        	android:name="android.support.v4.content.FileProvider"
+        	android:authorities="com.houhoudev.red.fileprovider"
+        	android:exported="false"
+        	android:grantUriPermissions="true">
+        	<meta-data
+            		android:name="android.support.FILE_PROVIDER_PATHS"
+            		android:resource="@xml/file_paths" />
+    	</provider>
 	<!-- 友盟 若项目中需要集成友盟统计，加入如下配置-->
-    <meta-data
-        android:name="UMENG_APPKEY"
-        android:value="友盟id"
-        tools:replace="android:value" />
+    	<meta-data
+        	android:name="UMENG_APPKEY"
+        	android:value="友盟id"
+        	tools:replace="android:value" />
 ```
 file_paths.xml
 
@@ -202,8 +202,8 @@ repositories {
             		}
       		}
 
-        @Override
-       	public void onFailure(int code) {
+        	@Override
+       		public void onFailure(int code) {
         		// 出错          
        		}
    	});
