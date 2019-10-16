@@ -1,4 +1,3 @@
-@[TOC](淘宝客SDK，一键导入淘宝客商城，快速实现流量变现)
 # 一、Demo项目地址
 github地址：[https://github.com/houhoudev/TaokeSdk](https://github.com/houhoudev/TaokeSdk)
 demo下载：[立即下载](https://houhoudev.oss-cn-shenzhen.aliyuncs.com/downLoad/TaokeSdk.apk)
