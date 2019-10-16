@@ -7,12 +7,6 @@ demo下载：[立即下载](https://houhoudev.oss-cn-shenzhen.aliyuncs.com/downL
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191016170031792.png)
 
-市场下载：[查看市场下载](https://sj.qq.com/myapp/detail.htm?apkName=com.houhoudev.red)
-
-扫码下载：
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/201910161705088.png)
-
 # 二、关于SDK
 
  - 支持淘宝授权登录、免登录
