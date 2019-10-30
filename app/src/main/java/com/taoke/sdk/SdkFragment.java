@@ -1,5 +1,6 @@
 package com.taoke.sdk;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.houhoudev.common.base.base.BaseFragment;
@@ -72,6 +73,8 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
         addClickListener(this, R.id.frag_sdk_btn_sign);
         addClickListener(this, R.id.frag_sdk_btn_userinfo);
         addClickListener(this, R.id.frag_sdk_btn_exit);
+
+        addClickListener(this, R.id.frag_sdk_sction_service);
     }
 
     @Override
@@ -147,6 +150,9 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
             case R.id.frag_sdk_btn_exit:
                 StoreSdk.exitLogin();
                 break;
+            case R.id.frag_sdk_sction_service:
+                startActivity(new Intent(getActivity(), ServiceActivity.class));
+                break;
         }
     }
 
@@ -162,18 +168,18 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onResponse(HttpResult result) {
                 if (result.isSuccess())
-                ToastUtils.show(result.getData());
+                    ToastUtils.show(result.getData());
                 /**{
-                    "coinsBalance":105302,
-                        "coinsDay":128,
-                        "messageCount":0,
-                        "code":"QQQW",
-                        "coinsMonth":1024,
-                        "recommend_id1":0,
-                        "name":"小小小小木木夕",
-                        "photo":"http://gw.alicdn.com/tps/i3/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png_160x160.jpg",
-                        "isSign":true
-                }**/
+                 "coinsBalance":105302,
+                 "coinsDay":128,
+                 "messageCount":0,
+                 "code":"QQQW",
+                 "coinsMonth":1024,
+                 "recommend_id1":0,
+                 "name":"小小小小木木夕",
+                 "photo":"http://gw.alicdn.com/tps/i3/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png_160x160.jpg",
+                 "isSign":true
+                 }**/
             }
 
             @Override

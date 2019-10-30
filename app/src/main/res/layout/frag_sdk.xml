@@ -5,13 +5,32 @@
     android:background="@color/main_gray"
     android:orientation="vertical">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="SDK"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/line_1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="SDK"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/frag_sdk_sction_service"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="@dimen/space_5"
+            android:background="?android:actionBarItemBackground"
+            android:drawableLeft="@drawable/icon_service"
+            android:drawablePadding="@dimen/space_5"
+            android:gravity="center_vertical"
+            android:text="服务"
+            android:textColor="#12B7F5" />
+    </FrameLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

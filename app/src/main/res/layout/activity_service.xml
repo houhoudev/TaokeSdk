@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:elevation="@dimen/line_1"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/act_service_close"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:background="?android:actionBarItemBackground"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务"
+            android:textSize="@dimen/font_18" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_10"
+        android:background="@color/main_gray" />
+
+    <TextView
+        android:id="@+id/act_service_tv_cloud"
+        style="@style/item_style"
+        android:text="购买云服务器" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_10"
+        android:background="@color/main_gray" />
+
+    <TextView
+        android:id="@+id/act_service_tv_qq"
+        style="@style/item_style"
+        android:text="QQ" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_1"
+        android:layout_marginLeft="@dimen/space_20"
+        android:background="@color/line_gray" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/act_service_tv_wechat"
+            style="@style/item_style"
+            android:text="微信" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="@dimen/space_40"
+            android:hint="复制" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/main_gray" />
+</LinearLayout>

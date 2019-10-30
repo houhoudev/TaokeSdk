@@ -11,7 +11,7 @@
         android:theme="@style/appTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon,android:label,android:theme">
-        <activity android:name="com.taoke.sdk.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,11 +34,11 @@
             android:name="UMENG_APPKEY"
             android:value="5d88afb83fc1955bfd000873"
             tools:replace="android:value" />
-
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="OPEN" />
 
+        <activity android:name=".ServiceActivity"></activity>
     </application>
 
 </manifest>

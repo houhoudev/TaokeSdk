@@ -12,6 +12,7 @@ import com.houhoudev.common.base.navactivity.NavEntity;
 import com.houhoudev.common.constants.Res;
 import com.houhoudev.common.eventbus.EventBusUtils;
 import com.houhoudev.common.eventbus.EventMessage;
+import com.houhoudev.common.update.UpdateUtils;
 import com.houhoudev.common.utils.ToastUtils;
 import com.houhoudev.store.utils.StoreSdk;
 
@@ -41,6 +42,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private void init() {
         initView();
         initListener();
+
+        // 检查软件更新
+        new UpdateUtils().check(this);
     }
 
     protected void initView() {
@@ -174,6 +178,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     // 记录用户首次点击返回键的时间
     private long firstTime = 0;
+
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
@@ -188,5 +193,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 break;
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // super.onSaveInstanceState(outState);
     }
 }
