@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bundle.putString("recommend_sort", "11");// 为你推荐/商品分类 列表排序
         bundle.putInt("span", 1);// 商品列表默认每行显示商品个数：传1或2
 
-        mFragments.add(StoreSdk.getMainFrag(new Bundle()));
+        mFragments.add(StoreSdk.getMainFrag(bundle));
 
         // 分类fragment
         mFragments.add(StoreSdk.getClassifyFrag());

@@ -38,7 +38,7 @@
             android:name="UMENG_CHANNEL"
             android:value="OPEN" />
 
-        <activity android:name=".ServiceActivity"></activity>
+        <activity android:name=".ServiceActivity"/>
     </application>
 
 </manifest>
