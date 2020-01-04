@@ -199,7 +199,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
         // 接收消息
         if ("GET_COINS_SUCCESS".equals(message.type)) {
             // 签到、浏览商品、每日签到等获得金币通知 做刷新用户信息操作
-            ToastUtils.show("签到成功");
+            // ToastUtils.show("签到成功");
         }
         if ("LOGIN_SUCCESS".equals(message.type)) {
             // 登陆成功 做刷新用户信息操作
