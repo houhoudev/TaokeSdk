@@ -60,6 +60,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
         addClickListener(this, R.id.frag_sdk_btn_main);
         addClickListener(this, R.id.frag_sdk_btn_classify);
         addClickListener(this, R.id.frag_sdk_btn_ranking);
+        addClickListener(this, R.id.frag_sdk_btn_people);
         addClickListener(this, R.id.frag_sdk_btn_mine);
 
         addClickListener(this, R.id.frag_sdk_btn_glod);
@@ -96,6 +97,10 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
             case R.id.frag_sdk_btn_ranking:
                 // 跳转榜单activity
                 StoreSdk.startRankingAct(getActivity());
+                break;
+            case R.id.frag_sdk_btn_people:
+                // 跳转发现activity
+                StoreSdk.startPeopleAct(getActivity());
                 break;
             case R.id.frag_sdk_btn_mine:
                 // 跳转我的activity

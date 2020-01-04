@@ -61,6 +61,12 @@
                 android:text="跳转榜单Activity" />
 
             <Button
+                android:id="@+id/frag_sdk_btn_people"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转发现Activity" />
+
+            <Button
                 android:id="@+id/frag_sdk_btn_mine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

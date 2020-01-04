@@ -14,6 +14,8 @@ import com.houhoudev.common.eventbus.EventBusUtils;
 import com.houhoudev.common.eventbus.EventMessage;
 import com.houhoudev.common.update.UpdateUtils;
 import com.houhoudev.common.utils.ToastUtils;
+import com.houhoudev.store.ui.home.find.FindFragment;
+import com.houhoudev.store.ui.store.search_result.view.SearchResultPopupWindow;
 import com.houhoudev.store.utils.StoreSdk;
 
 import java.util.ArrayList;
@@ -32,6 +34,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     protected List<NavEntity> mNavEntitys = new ArrayList<>();
 
+    // 检测商品标题
+    private SearchResultPopupWindow mSearchResultPopupWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +44,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSearchResultPopupWindow.onResume();
+    }
+
     private void init() {
         initView();
         initListener();
 
+        mSearchResultPopupWindow = new SearchResultPopupWindow(this, getWindow().getDecorView());
         // 检查软件更新
         new UpdateUtils().check(this);
     }
@@ -66,9 +78,26 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
      */
     protected void initFrag() {
         mFragments.add(new SdkFragment());
-        mFragments.add(StoreSdk.getMainFrag());
+
+        // 首页fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("hot_name", "今日上新");// 横向商品列表标题文字
+
+        // 排序：0.综合（最新），1.券后价(低到高)，2.券后价（高到低），3.券面额（高到低），4.月销量（高到低），
+        // 5.佣金比例（高到低），9.全天销量（高到低），11.近2小时销量（高到低）
+        bundle.putString("hot_sort", "0");// 横向商品列表排序方式：
+        bundle.putString("recommend_sort", "11");// 为你推荐/商品分类 列表排序
+        bundle.putInt("span", 1);// 商品列表默认每行显示商品个数：传1或2
+
+        mFragments.add(StoreSdk.getMainFrag(new Bundle()));
+
+        // 分类fragment
         mFragments.add(StoreSdk.getClassifyFrag());
+        // 榜单fragment
         mFragments.add(StoreSdk.getRankingFrag());
+        // 发现fragment
+        mFragments.add(new FindFragment());
+        // 我的fragment
         mFragments.add(StoreSdk.getMineFrag());
 
         FragmentTransaction tr = getSupportFragmentManager().beginTransaction();
@@ -98,6 +127,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 Res.getStr(R.string.bangdan),
                 R.drawable.icon_ranking_select,
                 R.drawable.icon_ranking_unselect));
+        mNavEntitys.add(new NavEntity(
+                Res.getStr(R.string.faxian),
+                R.drawable.icon_com_select,
+                R.drawable.icon_com_unselect));
         mNavEntitys.add(new NavEntity(
                 Res.getStr(R.string.wode),
                 R.drawable.icon_mine_select,

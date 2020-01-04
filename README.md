@@ -7,8 +7,10 @@
 
 - 扫码下载
 
-
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191016170031792.png)
+- 成功案例
+
+ ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104113737215.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104112529818.png)
 # 二、关于SDK
 
  - 支持淘宝授权登录、免登录
@@ -73,13 +75,13 @@ file_paths.xml
 
 ```java
 // 基础工具
-implementation 'com.houhoudev:common:1.0.2'
+implementation 'com.houhoudev:common:1.0.9.2'
 // 商城基础
-implementation 'com.houhoudev:store:1.0.2'
+implementation 'com.houhoudev:store:1.0.9.4'
 // 用户基础
-implementation 'com.houhoudev:user:1.0.2'
+implementation 'com.houhoudev:user:1.0.9'
 // 扫描二维码
-implementation 'com.houhoudev:zxing:1.0.2'
+implementation 'com.houhoudev:zxing:1.0.9'
 ```
 - 组件中已经包含了如下组件，请勿重复导入
 ```java
@@ -123,51 +125,99 @@ String unionId = ""; // 联盟id（一般传""）
 String appKey = "26313026"; // 淘宝联盟appKey
 StoreSdk.init(this, pid, adzoneid, unionId, appKey);// 初始化sdk
 ```
-- 首页模块Fragment
-
+-  模块、页面调用
 ```java
-Fragment mainFrag = StoreSdk.getMainFrag();
+// 首页fragment
+Bundle bundle = new Bundle();
+bundle.putString("hot_name", "今日上新");// 横向商品列表标题文字
+// 排序：0.综合（最新），1.券后价(低到高)，2.券后价（高到低），3.券面额（高到低），4.月销量（高到低），
+// 5.佣金比例（高到低），9.全天销量（高到低），11.近2小时销量（高到低）
+bundle.putString("hot_sort", "0");// 横向商品列表排序方式：
+bundle.putString("recommend_sort", "11");// 为你推荐/商品分类 列表排序
+bundle.putInt("span", 1);// 商品列表默认每行显示商品个数：传1或2
+Fragment fragment = StoreSdk.getMainFrag(bundle);
 ```
-![首页Fragment](https://img-blog.csdnimg.cn/20191015172942822.jpg)
-- 跳转首页Activity
 ```java
 // 跳转首页Activity
 StoreSdk.startMainAct(getActivity());
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2019101517383471.jpg)
-- 更多调用
+  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104103913925.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104104028279.jpg)
 
+```java
+// 检测商品标题（在首页Activity中检测）
+private SearchResultPopupWindow mSearchResultPopupWindow;
+private void init() {
+	// 初始对象
+	mSearchResultPopupWindow = new SearchResultPopupWindow(this, getWindow().getDecorView());
+}
+@Override
+protected void onResume() {
+	super.onResume();
+	// 首页每次获得焦点时检测，检测到商品标题时弹出
+	mSearchResultPopupWindow.onResume();
+}
+```
+```java
+// 扫一扫activity
+StoreSdk.startErCode(this);
+
+// onActivity中处理
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+	// 扫一扫处理
+	StoreSdk.onErCodeResult(this, requestCode, resultCode, data);
+}
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104105257727.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/2020010410534398.jpg)
 ```java
 // 分类fragment
 Fragment classifyfrag = StoreSdk.getClassifyFrag();
 // 跳转分类Activity
 StoreSdk.startClassifygAct(this);
+```
 
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104110213213.jpg) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/2020010411020340.jpg)
+```java
 // 榜单Fragment
 Fragment rankingFrag = StoreSdk.getRankingFrag();
 // 跳转榜单Activity
 StoreSdk.startClassifygAct(this);
-
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111539782.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111531747.jpg)
+```java
+// 发现Fragment
+Frament fragment = new FindFragment();
+// 发现Activity
+StoreSdk.startPeopleAct(this);
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111658915.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111657551.jpg)
+```java
 // 我的Fragment
 Fragment mineFrag = StoreSdk.getMineFrag();
 // 跳转我的Activity
 StoreSdk.startMineAct(this);
-
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111927151.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/2020010411185677.jpg)
+```java
 // 跳转金币Activity
 StoreSdk.startCoinsAct(this);
-
 // 邀请好友Activity
 StoreSdk.startFriends(this);
-
+```
+```java
 // 商品详情Activity
 StoreSdk.startGoodDetail(this, 521422451240L);
-
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111808339.jpg)
+```java
 // 我的收藏Activity
 StoreSdk.startCollection(this);
-
-// 历史记录Acivity
+// 我的足迹Acivity
 StoreSdk.startHistory(this);
-
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104112132874.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104112102426.jpg)
+```java
 // 系统消息Activity
 StoreSdk.startMessageAct(this);
 
@@ -216,19 +266,6 @@ StoreSdk.userInfo(new HttpCallBack() {
     "name":"小小小小木木夕", // 昵称
     "photo":"http://gw.alicdn.com/tps/i3/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png_160x160.jpg", // 头像
     "isSign":true // 是否已签到
-}
-```
-
-```java
-// 扫一扫activity
-StoreSdk.startErCode(this);
-
-// onActivity中处理
-@Override
-public void onActivityResult(int requestCode, int resultCode, Intent data) {
-	super.onActivityResult(requestCode, resultCode, data);
-	// 扫一扫处理
-	StoreSdk.onErCodeResult(this, requestCode, resultCode, data);
 }
 ```
 - 发送消息事件
@@ -373,9 +410,19 @@ new UpdateUtils().check(this);
 -keep class * implements mtopsdk.mtop.global.init.IMtopInitTask {*;}
 ```
 # 七、更新日志
+- v1.0.9（2020-01-04）
+新增发现Fragment、Activity
+新增首页商品标题检测
+修改首页Fragment参数定制
 - v1.0.3（2019-10-30）
 新增商品视频详情功能
 新增首页活动弹窗、悬浮入口
 优化金币提现功能
 - v1.0.2（2019-10-15）
 首个版本
+
+# 八、支持
+- QQ
+2276280645
+- 微信
+lijunjie8579
