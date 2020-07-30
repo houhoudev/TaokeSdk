@@ -4,11 +4,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
-        maven { url 'https://dl.bintray.com/umsdk/release' }
-        maven { url 'https://raw.githubusercontent.com/houhoudev/repository/master' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -23,7 +18,7 @@ allprojects {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
         maven { url 'https://dl.bintray.com/umsdk/release' }
-        maven { url 'https://raw.githubusercontent.com/houhoudev/repository/master' }
+        maven { url "https://gitee.com/houHouDev/repository/raw/master" }
     }
 }
 
