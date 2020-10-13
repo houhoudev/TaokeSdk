@@ -1,4 +1,5 @@
 @[TOC](淘宝客SDK，一键导入淘宝客商城，快速实现流量变现)
+<font size=6 color=#FF0000>特别注意：旧版本停止维护，需尽快升级到v1.2.3版本</font>
 # 一、Demo项目地址
 - github地址：[https://github.com/houhoudev/TaokeSdk](https://github.com/houhoudev/TaokeSdk)
 - 部分接口文档：[https://www.showdoc.cc/348614373887448?page_id=2006667515972703](https://www.showdoc.cc/348614373887448?page_id=2006667515972703)
@@ -8,13 +9,11 @@
 - 扫码下载
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191016170031792.png)
-- 成功案例
-
- ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104113737215.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104112529818.png)
 # 二、关于SDK
 
  - 支持淘宝授权登录、免登录
  - 一键接入各种商城模块
+ - 部署自己的服务器，实现用户返利
  - 一键配置淘宝客推广位，赚取收益
  - 体积小，增量约为5M左右
 # 三、接入前准备
@@ -75,13 +74,13 @@ file_paths.xml
 
 ```java
 // 基础工具
-implementation 'com.houhoudev:common:1.0.9.2'
+implementation 'com.houhoudev:common:1.2.3'
 // 商城基础
-implementation 'com.houhoudev:store:1.0.9.4'
+implementation 'com.houhoudev:store:1.2.3'
 // 用户基础
-implementation 'com.houhoudev:user:1.0.9'
+implementation 'com.houhoudev:user:1.2.3'
 // 扫描二维码
-implementation 'com.houhoudev:zxing:1.0.9'
+implementation 'com.houhoudev:zxing:1.2.3'
 ```
 - 组件中已经包含了如下组件，请勿重复导入
 ```java
@@ -94,7 +93,7 @@ implementation 'com.google.code.gson:gson:2.8.2'
 implementation 'com.umeng.umsdk:analytics:8.0.0'
 implementation 'com.umeng.umsdk:common:2.0.0'
 // OKHttp
-implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+implementation 'com.squareup.okhttp3:okhttp:4.8.1'
 // RecyclerViewAdapter
 implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
 // EventBus
@@ -108,6 +107,8 @@ repositories {
 	maven { url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
 	// 友盟
 	maven { url 'https://dl.bintray.com/umsdk/release' }
+	// 阿里镜像
+	maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
 	// 商城
 	maven { url 'https://raw.githubusercontent.com/houhoudev/repository/master' }
 }
@@ -137,6 +138,12 @@ bundle.putString("recommend_sort", "11");// 为你推荐/商品分类 列表排�
 bundle.putInt("span", 1);// 商品列表默认每行显示商品个数：传1或2
 Fragment fragment = StoreSdk.getMainFrag(bundle);
 ```
+```java
+// 我的订单activity（需配合返利功能使用）
+StoreSdk.startOrderAct(getActivity());
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013170725636.jpg)
+
 ```java
 // 跳转首页Activity
 StoreSdk.startMainAct(getActivity());
@@ -187,11 +194,17 @@ StoreSdk.startClassifygAct(this);
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111539782.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111531747.jpg)
 ```java
 // 发现Fragment
-Frament fragment = new FindFragment();
+Frament propleFrag = StoreSdk.getPeopleFrag();
 // 发现Activity
 StoreSdk.startPeopleAct(this);
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111658915.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111657551.jpg)
+```java
+// 品牌fragment
+Fragment brandFrag = StoreSdk.getBrandFrag());
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013164713649.jpg)
+
 ```java
 // 我的Fragment
 Fragment mineFrag = StoreSdk.getMineFrag();
@@ -321,7 +334,6 @@ public void onReceiveMessage(EventMessage message) {
 // 检查软件更新，需要在我们后台配置
 new UpdateUtils().check(this);
 ```
-
 # 六、混淆
 
 ```java
@@ -410,28 +422,17 @@ new UpdateUtils().check(this);
 -keep class * implements mtopsdk.mtop.global.init.IMtopInitTask {*;}
 ```
 # 七、更新日志
+- v1.2.3（2020-10-13）
+新增返利功能（需部署自己的服务器）
+新增我的订单功能（需配合返利使用）
+新增品牌模块
 - v1.0.9（2020-01-04）
-
 新增发现Fragment、Activity
-
 新增首页商品标题检测
-
 修改首页Fragment参数定制
-
 - v1.0.3（2019-10-30）
-
 新增商品视频详情功能
-
 新增首页活动弹窗、悬浮入口
-
 优化金币提现功能
-
 - v1.0.2（2019-10-15）
-
 首个版本
-
-# 八、支持
-- QQ
-2276280645
-- 微信
-lijunjie8579

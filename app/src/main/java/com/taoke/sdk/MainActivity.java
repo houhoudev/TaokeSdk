@@ -14,7 +14,6 @@ import com.houhoudev.common.eventbus.EventBusUtils;
 import com.houhoudev.common.eventbus.EventMessage;
 import com.houhoudev.common.update.UpdateUtils;
 import com.houhoudev.common.utils.ToastUtils;
-import com.houhoudev.store.ui.home.find.FindFragment;
 import com.houhoudev.store.ui.store.search_result.view.SearchResultPopupWindow;
 import com.houhoudev.store.utils.StoreSdk;
 
@@ -96,7 +95,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         // 榜单fragment
         mFragments.add(StoreSdk.getRankingFrag());
         // 发现fragment
-        mFragments.add(new FindFragment());
+        mFragments.add(StoreSdk.getPeopleFrag());
+        // 品牌fragment
+        mFragments.add(StoreSdk.getBrandFrag());
         // 我的fragment
         mFragments.add(StoreSdk.getMineFrag());
 
@@ -131,6 +132,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 Res.getStr(R.string.faxian),
                 R.drawable.icon_com_select,
                 R.drawable.icon_com_unselect));
+        mNavEntitys.add(new NavEntity(
+                Res.getStr(R.string.pingpai),
+                R.drawable.icon_brand_select,
+                R.drawable.icon_brand_unselect));
         mNavEntitys.add(new NavEntity(
                 Res.getStr(R.string.wode),
                 R.drawable.icon_mine_select,

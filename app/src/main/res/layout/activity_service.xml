@@ -45,7 +45,7 @@
     <TextView
         android:id="@+id/act_service_tv_qq"
         style="@style/item_style"
-        android:text="QQ" />
+        android:text="QQ咨询" />
 
     <View
         android:layout_width="match_parent"
@@ -60,15 +60,22 @@
         <TextView
             android:id="@+id/act_service_tv_wechat"
             style="@style/item_style"
-            android:text="微信" />
+            android:text="微信咨询（lijunjie8579）" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:layout_marginRight="@dimen/space_40"
-            android:hint="复制" />
+            android:hint="复制微信号" />
     </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="@dimen/space_20"
+        android:text="* 返利功能需部署自己的服务器咨询\n* 源码咨询\n* 更多技术咨询" />
 
     <View
         android:layout_width="match_parent"

@@ -57,6 +57,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initListener() {
+        addClickListener(this, R.id.frag_sdk_btn_order);
         addClickListener(this, R.id.frag_sdk_btn_main);
         addClickListener(this, R.id.frag_sdk_btn_classify);
         addClickListener(this, R.id.frag_sdk_btn_ranking);
@@ -86,6 +87,10 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.frag_sdk_btn_order:
+                // 我的订单activity（需配合返利功能使用）
+                StoreSdk.startOrderAct(getActivity());
+                break;
             case R.id.frag_sdk_btn_main:
                 // 跳转首页activity
                 StoreSdk.startMainAct(getActivity());
@@ -173,7 +178,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onResponse(HttpResult result) {
                 if (result.isSuccess())
-                    ToastUtils.show(result.getData());
+                    ToastUtils.show(result.data());
                 /**{
                  "coinsBalance":105302,
                  "coinsDay":128,
