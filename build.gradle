@@ -15,10 +15,10 @@ allprojects {
         google()
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url 'https://houhoudev.oss-cn-shenzhen.aliyuncs.com/repository/' }
         maven { url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
         maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
-        maven { url 'https://raw.githubusercontent.com/houhoudev/repository/master' }
     }
 }
 

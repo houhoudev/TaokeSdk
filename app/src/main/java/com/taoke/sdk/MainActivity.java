@@ -2,9 +2,10 @@ package com.taoke.sdk;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -12,8 +13,8 @@ import com.houhoudev.common.base.navactivity.NavEntity;
 import com.houhoudev.common.constants.Res;
 import com.houhoudev.common.eventbus.EventBusUtils;
 import com.houhoudev.common.eventbus.EventMessage;
-import com.houhoudev.common.update.UpdateUtils;
 import com.houhoudev.common.utils.ToastUtils;
+import com.houhoudev.comtool.utils.update.UpdateUtils;
 import com.houhoudev.store.ui.store.search_result.view.SearchResultPopupWindow;
 import com.houhoudev.store.utils.StoreSdk;
 

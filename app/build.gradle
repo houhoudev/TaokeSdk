@@ -7,7 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 9
-        versionName "1.2.3"
+        versionName "2.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 scheme : "taokesdk",
@@ -53,8 +53,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.houhoudev:common:1.2.3'
-    implementation 'com.houhoudev:store:1.2.3'
-    implementation 'com.houhoudev:user:1.2.3'
-    implementation 'com.houhoudev:zxing:1.2.3'
+    implementation 'com.houhoudev:store:2.0.0.210709'
+    implementation 'com.houhoudev:user:2.0.0.210709'
+    implementation 'com.houhoudev:zxing:2.0.0.210709'
 }

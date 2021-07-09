@@ -21,7 +21,7 @@
         <activity android:name="com.houhoudev.store.ui.home.StoreMainActivity" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.taoke.sdk.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
