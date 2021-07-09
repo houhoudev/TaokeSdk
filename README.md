@@ -1,7 +1,6 @@
+
 @[TOC](淘宝客SDK，一键导入淘宝客商城，快速实现流量变现)
-
 <font size=6 color=#FF0000>特别注意：旧版本停止维护，需尽快升级到v1.2.3版本</font>
-
 # 一、Demo项目地址
 - github地址：[https://github.com/houhoudev/TaokeSdk](https://github.com/houhoudev/TaokeSdk)
 - 部分接口文档：[https://www.showdoc.cc/348614373887448?page_id=2006667515972703](https://www.showdoc.cc/348614373887448?page_id=2006667515972703)
@@ -75,14 +74,12 @@ file_paths.xml
 
 
 ```java
-// 基础工具
-implementation 'com.houhoudev:common:1.2.3'
 // 商城基础
-implementation 'com.houhoudev:store:1.2.3'
+implementation 'com.houhoudev:store:2.0.0.210709'
 // 用户基础
-implementation 'com.houhoudev:user:1.2.3'
+implementation 'com.houhoudev:user:2.0.0.210709'
 // 扫描二维码
-implementation 'com.houhoudev:zxing:1.2.3'
+implementation 'com.houhoudev:zxing:2.0.0.210709'
 ```
 - 组件中已经包含了如下组件，请勿重复导入
 ```java
@@ -109,10 +106,8 @@ repositories {
 	maven { url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
 	// 友盟
 	maven { url 'https://dl.bintray.com/umsdk/release' }
-	// 阿里镜像
-	maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
 	// 商城
-	maven { url 'https://raw.githubusercontent.com/houhoudev/repository/master' }
+	maven { url 'https://houhoudev.oss-cn-shenzhen.aliyuncs.com/repository/' }
 }
 
 ```
@@ -122,11 +117,15 @@ repositories {
 
 
 ```java
+// 初始化sdk，在application中调用
+StoreSdk.initApplication(this);
+// 以下代码在用户同意隐私协议后调用
 String pid = "mm_118568524_485000365_109457800416"; // 淘宝联盟pid
 String adzoneid = "109457800416"; // pid最后一段
 String unionId = ""; // 联盟id（一般传""）
 String appKey = "26313026"; // 淘宝联盟appKey
-StoreSdk.init(this, pid, adzoneid, unionId, appKey);// 初始化sdk
+boolean isRebate = false; // 是否带返利，返利功能需要部署自己的服务器
+StoreSdk.init(pid, adzoneid, unionId, appKey, isRebate);
 ```
 -  模块、页面调用
 ```java
@@ -424,6 +423,10 @@ new UpdateUtils().check(this);
 -keep class * implements mtopsdk.mtop.global.init.IMtopInitTask {*;}
 ```
 # 七、更新日志
+- v2.0.0.210709（2021-07-09）
+升级androidx
+预初始化，合规化
+重构、性能优化
 - v1.2.3（2020-10-13）
 新增返利功能（需部署自己的服务器）
 新增我的订单功能（需配合返利使用）
