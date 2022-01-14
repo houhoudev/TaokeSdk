@@ -105,7 +105,7 @@ repositories {
 	// 阿里百川
 	maven { url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
 	// 友盟
-	maven { url 'https://dl.bintray.com/umsdk/release' }
+	maven { url 'https://repo1.maven.org/maven2/' }
 	// 商城
 	maven { url 'https://houhoudev.oss-cn-shenzhen.aliyuncs.com/repository/' }
 }
