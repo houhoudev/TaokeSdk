@@ -1,18 +1,29 @@
-apply plugin: 'com.android.application'
-
+plugins {
+    id 'com.android.application'
+}
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.taoke.sdk"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 9
-        versionName "2.0.0"
+        minSdkVersion 23
+        targetSdkVersion 31
+        versionCode 10
+        versionName "3.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 scheme : "taokesdk",
                 product: 1
         ]
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
     }
     buildTypes {
         release {
@@ -36,10 +47,9 @@ android {
         }
     }
 
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     android {
@@ -51,9 +61,16 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
 
-    implementation 'com.houhoudev:store:2.0.0.210709'
-    implementation 'com.houhoudev:user:2.0.0.210709'
-    implementation 'com.houhoudev:zxing:2.0.0.210709'
+    // ARouter路由
+    implementation "com.alibaba:arouter-api:1.5.2"
+    annotationProcessor "com.alibaba:arouter-compiler:1.5.2"
+
+    // 商城基础
+    implementation 'com.houhoudev:store:3.0.0'
+    // 金币相关
+    implementation 'com.houhoudev:coins:3.0.0'
+    // 用户基础
+    implementation 'com.houhoudev:user:3.0.0'
 }

@@ -1,6 +1,5 @@
 package com.taoke.sdk;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
@@ -206,13 +205,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             message.type = "RANK_TOP";
             EventBusUtils.post(message);
         }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // 扫一扫处理
-        StoreSdk.onErCodeResult(this, requestCode, resultCode, data);
     }
 
     // 记录用户首次点击返回键的时间

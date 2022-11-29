@@ -2,6 +2,7 @@ package com.taoke.sdk;
 
 import android.app.Application;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.houhoudev.store.utils.StoreSdk;
 
 public class MainApplication extends Application {
@@ -17,6 +18,9 @@ public class MainApplication extends Application {
     }
 
     private void initStoreSdk() {
+        // ARouter
+        ARouter.init(this);
+
         // 初始化sdk，在application中调用
         StoreSdk.initApplication(this);
 

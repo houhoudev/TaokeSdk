@@ -1,6 +1,6 @@
 
 @[TOC](淘宝客SDK，一键导入淘宝客商城，快速实现流量变现)
-<font size=6 color=#FF0000>特别注意：旧版本停止维护，需尽快升级到v1.2.3版本</font>
+<font size=6 color=#FF0000>特别注意：旧版本停止维护，需尽快升级到v3.0.0版本</font>
 # 一、Demo项目地址
 - github地址：[https://github.com/houhoudev/TaokeSdk](https://github.com/houhoudev/TaokeSdk)
 - 部分接口文档：[https://www.showdoc.cc/348614373887448?page_id=2006667515972703](https://www.showdoc.cc/348614373887448?page_id=2006667515972703)
@@ -12,11 +12,11 @@
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191016170031792.png)
 # 二、关于SDK
 
- - 支持淘宝授权登录、免登录
- - 一键接入各种商城模块
- - 部署自己的服务器，实现用户返利
- - 一键配置淘宝客推广位，赚取收益
- - 体积小，增量约为5M左右
+- 支持淘宝授权登录、免登录
+- 一键接入各种商城模块
+- 部署自己的服务器，实现用户返利
+- 一键配置淘宝客推广位，赚取收益
+- 体积小，增量约为5M左右
 # 三、接入前准备
 - 1、注册淘宝联盟，获取推广位id，注册链接：[https://pub.alimama.com/](https://pub.alimama.com/)
 - 2、注册阿里百川，获取电商权限、安全图片，注册链接：[https://baichuan.taobao.com/](https://baichuan.taobao.com/)
@@ -27,9 +27,9 @@ Module下build.gradle中配置
 defaultConfig {
 
 	///////
-
+	
 	manifestPlaceholders = [
-	scheme : "sdk", // 协议，自己定义一个任意字符串即可
+		scheme : "sdk", // 协议，自己定义一个任意字符串即可
 		product: 1 // 产品id，邀请好友，软件更新等地方需要用到，需要在我们后台配置
 	]
 }
@@ -67,34 +67,56 @@ file_paths.xml
 		path="/" />
 </paths>
 ```
+<font size=6 color=#FF0000>3.0.0新增配置</font>
 
+1、ARouter配置：在Module下build.gradle中配置
+
+```java
+defaultConfig {
+
+	///////
+	
+	javaCompileOptions {
+        annotationProcessorOptions {
+            arguments = [AROUTER_MODULE_NAME: project.getName()]
+        }
+    }
+}
+```
+
+2、导入百川SDK：复制demo中的libs文件夹到项目中
 # 五、接入SDK
 ## 1、组件说明
- - 导入组件
+- 导入组件
 
 
 ```java
+// 自动导入libs目录下的jar和aar
+implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+// ARouter路由
+implementation "com.alibaba:arouter-api:1.5.2"
+annotationProcessor "com.alibaba:arouter-compiler:1.5.2"
 // 商城基础
-implementation 'com.houhoudev:store:2.0.0.210709'
+implementation 'com.houhoudev:store:3.0.0'
+// 金币相关
+implementation 'com.houhoudev:coins:3.0.0'
 // 用户基础
-implementation 'com.houhoudev:user:2.0.0.210709'
-// 扫描二维码
-implementation 'com.houhoudev:zxing:2.0.0.210709'
+implementation 'com.houhoudev:user:3.0.0'
 ```
 - 组件中已经包含了如下组件，请勿重复导入
 ```java
 // 图片缓存
-implementation 'com.github.bumptech.glide:glide:4.8.0'
-annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+implementation 'com.github.bumptech.glide:glide:4.13.2'
 // gson解析
-implementation 'com.google.code.gson:gson:2.8.2'
+implementation 'com.google.code.gson:gson:2.8.9'
 // 友盟统计
-implementation 'com.umeng.umsdk:analytics:8.0.0'
-implementation 'com.umeng.umsdk:common:2.0.0'
+implementation 'com.umeng.umsdk:common:9.5.0'
+implementation 'com.umeng.umsdk:asms:1.6.3'
+implementation 'com.umeng.umsdk:apm:1.31.1'
 // OKHttp
-implementation 'com.squareup.okhttp3:okhttp:4.8.1'
+implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 // RecyclerViewAdapter
-implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
+implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
 // EventBus
 implementation ('org.greenrobot:eventbus:3.1.1')
 ```
@@ -102,8 +124,6 @@ implementation ('org.greenrobot:eventbus:3.1.1')
 
 ```java
 repositories {
-	// 阿里百川
-	maven { url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/" }
 	// 友盟
 	maven { url 'https://repo1.maven.org/maven2/' }
 	// 商城
@@ -117,6 +137,8 @@ repositories {
 
 
 ```java
+// ARouter路由初始化
+ARouter.init(this);
 // 初始化sdk，在application中调用
 StoreSdk.initApplication(this);
 // 以下代码在用户同意隐私协议后调用
@@ -128,6 +150,12 @@ boolean isRebate = false; // 是否带返利，返利功能需要部署自己的
 StoreSdk.init(pid, adzoneid, unionId, appKey, isRebate);
 ```
 -  模块、页面调用
+
+```java
+// 我的订单activity（需配合返利功能使用）
+StoreSdk.startOrderAct(getActivity());
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013170725636.jpg)
 ```java
 // 首页fragment
 Bundle bundle = new Bundle();
@@ -140,16 +168,10 @@ bundle.putInt("span", 1);// 商品列表默认每行显示商品个数：传1或
 Fragment fragment = StoreSdk.getMainFrag(bundle);
 ```
 ```java
-// 我的订单activity（需配合返利功能使用）
-StoreSdk.startOrderAct(getActivity());
-```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013170725636.jpg)
-
-```java
 // 跳转首页Activity
 StoreSdk.startMainAct(getActivity());
 ```
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104103913925.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104104028279.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104103913925.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104104028279.jpg)
 
 ```java
 // 检测商品标题（在首页Activity中检测）
@@ -168,7 +190,7 @@ protected void onResume() {
 ```java
 // 扫一扫activity
 StoreSdk.startErCode(this);
-
+		
 // onActivity中处理
 @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -186,7 +208,7 @@ StoreSdk.startClassifygAct(this);
 ```
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104110213213.jpg) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/2020010411020340.jpg)
-```java
+```java	
 // 榜单Fragment
 Fragment rankingFrag = StoreSdk.getRankingFrag();
 // 跳转榜单Activity
@@ -224,27 +246,27 @@ StoreSdk.startFriends(this);
 StoreSdk.startGoodDetail(this, 521422451240L);
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104111808339.jpg)
-```java
+```java	
 // 我的收藏Activity
 StoreSdk.startCollection(this);
 // 我的足迹Acivity
 StoreSdk.startHistory(this);
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104112132874.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![在这里插入图片描述](https://img-blog.csdnimg.cn/20200104112102426.jpg)
-```java
+```java	
 // 系统消息Activity
 StoreSdk.startMessageAct(this);
-
+	
 // 购物车Activity
 StoreSdk.startCarts(this);
-
+	
 // 登录Activity
 // 判断是否登录
 if (!StoreSdk.isLogin()) {
 	// 跳转登录页面
 	StoreSdk.startLogin(getActivity());
 }
-
+   	
 // 每日签到
 if (StoreSdk.isLogin()) {
 	StoreSdk.sign();
@@ -263,7 +285,7 @@ StoreSdk.userInfo(new HttpCallBack() {
 
 	@Override
 	public void onFailure(int code) {
-		// 出错
+		// 出错          
 	}
 });
 ```
@@ -301,28 +323,28 @@ EventBusUtils.post(message);
 
 ```java
 // 需要在接收事件的类中注册和取消注册事件
-
+	
 // 注册事件
 EventBusUtils.register(this);
-
+	
 // 取消注册事件
 EventBusUtils.unregister(this);
 ```
 
 ```java
-// 在类添加订阅事件
+// 在类添加订阅事件 
 @Subscribe
 public void onReceiveMessage(EventMessage message) {
 	if ("GET_COINS_SUCCESS".equals(message.type)) {
 		// 签到、浏览商品、每日签到等获得金币通知 做刷新用户信息操作
 		ToastUtils.show("签到成功");
 	}
-
+        
 	if ("LOGIN_SUCCESS".equals(message.type)) {
 		// 登陆成功 做刷新用户信息操作
 		ToastUtils.show("登录成功");
 	}
-
+        
 	if ("EXIT_LOGIN".equals(message.type)) {
 		// 退出登录成功 做清除用户信息操作
 		ToastUtils.show("退出成功");
@@ -395,8 +417,6 @@ new UpdateUtils().check(this);
 # 阿里百川
 -keepattributes Signature
 -ignorewarnings
--keep class com.houhoudev.** {*;}
--keepclassmembers class com.houhoudev.** {*;}
 -keep class javax.ws.rs.** { *; }
 -keep class com.alibaba.fastjson.** { *; }
 -dontwarn com.alibaba.fastjson.**
@@ -421,23 +441,27 @@ new UpdateUtils().check(this);
 -keep class com.alibaba.wireless.security.**{*;}
 -keep interface mtopsdk.mtop.global.init.IMtopInitTask {*;}
 -keep class * implements mtopsdk.mtop.global.init.IMtopInitTask {*;}
+
 ```
 # 七、更新日志
+- v3.0.0（2022-11-29）
+  升级最新百川sdk
+  升级淘宝商品接口
 - v2.0.0.210709（2021-07-09）
-升级androidx
-预初始化，合规化
-重构、性能优化
+  升级androidx
+  预初始化，合规化
+  重构、性能优化
 - v1.2.3（2020-10-13）
-新增返利功能（需部署自己的服务器）
-新增我的订单功能（需配合返利使用）
-新增品牌模块
+  新增返利功能（需部署自己的服务器）
+  新增我的订单功能（需配合返利使用）
+  新增品牌模块
 - v1.0.9（2020-01-04）
-新增发现Fragment、Activity
-新增首页商品标题检测
-修改首页Fragment参数定制
+  新增发现Fragment、Activity
+  新增首页商品标题检测
+  修改首页Fragment参数定制
 - v1.0.3（2019-10-30）
-新增商品视频详情功能
-新增首页活动弹窗、悬浮入口
-优化金币提现功能
+  新增商品视频详情功能
+  新增首页活动弹窗、悬浮入口
+  优化金币提现功能
 - v1.0.2（2019-10-15）
-首个版本
+  首个版本

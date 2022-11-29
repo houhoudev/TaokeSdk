@@ -1,15 +1,18 @@
 package com.taoke.sdk;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
+import com.blankj.utilcode.util.BarUtils;
 import com.houhoudev.common.base.base.BaseFragment;
 import com.houhoudev.common.constants.Res;
 import com.houhoudev.common.eventbus.EventBusUtils;
 import com.houhoudev.common.eventbus.EventMessage;
 import com.houhoudev.common.network.HttpCallBack;
 import com.houhoudev.common.network.HttpResult;
-import com.houhoudev.common.utils.StatusBarUtils;
 import com.houhoudev.common.utils.ToastUtils;
 import com.houhoudev.store.utils.StoreSdk;
 
@@ -36,11 +39,11 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
     private void onShow() {
         if (!isHidden()) {
             // 设置状态栏文字颜色为黑色
-            StatusBarUtils.setLightMode(getActivity());
+            BarUtils.setNavBarLightMode(requireActivity(), true);
             // 设置状态栏文字颜色为白色
             // StatusBarUtils.setDarkMode(getActivity());
             // 设置状态栏背景颜色
-            StatusBarUtils.setColor(getActivity(), Res.getColor(R.color.statusBarColor));
+            BarUtils.setStatusBarColor(requireActivity(), Res.getColor(R.color.statusBarColor));
         }
     }
 
@@ -84,6 +87,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -93,7 +97,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.frag_sdk_btn_main:
                 // 跳转首页activity
-                StoreSdk.startMainAct(getActivity());
+                StoreSdk.startMainAct(requireActivity());
                 break;
             case R.id.frag_sdk_btn_classify:
                 // 跳转分类activity
@@ -105,7 +109,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.frag_sdk_btn_people:
                 // 跳转发现activity
-                StoreSdk.startPeopleAct(getActivity());
+                StoreSdk.startPeopleAct(requireActivity());
                 break;
             case R.id.frag_sdk_btn_mine:
                 // 跳转我的activity
@@ -125,11 +129,11 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.frag_sdk_btn_collectiion:
                 // 我的收藏activity
-                StoreSdk.startCollection(getActivity());
+                StoreSdk.startCollection(requireActivity());
                 break;
             case R.id.frag_sdk_btn_history:
-                // 历史记录acivity
-                StoreSdk.startHistory(getActivity());
+                // 历史记录activity
+                StoreSdk.startHistory(requireActivity());
                 break;
             case R.id.frag_sdk_btn_message:
                 // 系统消息activity
@@ -138,7 +142,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
             case R.id.frag_sdk_btn_ercode:
                 // 扫一扫activity
                 // onActivity中处理：StoreSdk.onErCodeResult(activity, requestCode, resultCode, data);
-                StoreSdk.startErCode(getActivity());
+                StoreSdk.startErCode(this);
                 break;
             case R.id.frag_sdk_btn_cart:
                 // 购物车activity
@@ -150,7 +154,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
                     StoreSdk.sign();
                 } else {
                     // 跳转登录页面
-                    StoreSdk.startLogin(getActivity());
+                    StoreSdk.startLogin(requireActivity());
                 }
                 break;
             case R.id.frag_sdk_btn_userinfo:
@@ -179,17 +183,6 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
             public void onResponse(HttpResult result) {
                 if (result.isSuccess())
                     ToastUtils.show(result.data());
-                /**{
-                 "coinsBalance":105302,
-                 "coinsDay":128,
-                 "messageCount":0,
-                 "code":"QQQW",
-                 "coinsMonth":1024,
-                 "recommend_id1":0,
-                 "name":"小小小小木木夕",
-                 "photo":"http://gw.alicdn.com/tps/i3/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png_160x160.jpg",
-                 "isSign":true
-                 }**/
             }
 
             @Override
@@ -204,7 +197,7 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
         // 接收消息
         if ("GET_COINS_SUCCESS".equals(message.type)) {
             // 签到、浏览商品、每日签到等获得金币通知 做刷新用户信息操作
-            // ToastUtils.show("签到成功");
+            ToastUtils.show("签到成功");
         }
         if ("LOGIN_SUCCESS".equals(message.type)) {
             // 登陆成功 做刷新用户信息操作
@@ -214,6 +207,12 @@ public class SdkFragment extends BaseFragment implements View.OnClickListener {
             // 退出成功 做清除用户信息操作
             ToastUtils.show("退出成功");
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        StoreSdk.onErCodeResult(requireActivity(), requestCode, resultCode, data);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.taoke.sdk;
 
+import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class ServiceActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.act_service_tv_wechat).setOnClickListener(this);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
