@@ -24,6 +24,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a"
         }
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -38,6 +40,9 @@ android {
             storePassword 'taokesdk'
             keyAlias 'yz'
             keyPassword 'taokesdk'
+
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
         release {
             storeFile file("./taokesdk.jks")

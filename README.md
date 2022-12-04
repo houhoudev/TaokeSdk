@@ -138,16 +138,18 @@ repositories {
 
 ```java
 // ARouter路由初始化
-ARouter.init(this);
+ARouter.init(this)
 // 初始化sdk，在application中调用
-StoreSdk.initApplication(this);
+StoreSdk.initApplication(this)
 // 以下代码在用户同意隐私协议后调用
-String pid = "mm_118568524_485000365_109457800416"; // 淘宝联盟pid
-String adzoneid = "109457800416"; // pid最后一段
-String unionId = ""; // 联盟id（一般传""）
-String appKey = "26313026"; // 淘宝联盟appKey
-boolean isRebate = false; // 是否带返利，返利功能需要部署自己的服务器
-StoreSdk.init(pid, adzoneid, unionId, appKey, isRebate);
+val pid = "mm_118568524_485000365_109457800416" // 淘宝联盟pid
+val adZoneId = "109457800416" // pid最后一段
+val unionId = "" // 联盟id（一般传""）
+val appKey = "26313026" // 淘宝联盟appKey
+val isRebate = false // 是否带返利，返利功能需要部署自己的服务器
+StoreSdk.init(pid, adZoneId, unionId, appKey, isRebate)
+// 初始化小程序
+MiniProgramConfig.init(this, null)
 ```
 -  模块、页面调用
 
