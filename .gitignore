@@ -13,3 +13,4 @@
 /captures
 .externalNativeBuild
 /.idea/gradle.xml
+/app/release/

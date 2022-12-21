@@ -5,7 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.houhoudev.store.utils.StoreSdk
 import com.olive.config.MiniProgramConfig
 
-class MainApplication : Application() {
+class MainApplicationKtn : Application() {
     override fun onCreate() {
         super.onCreate()
         init()
